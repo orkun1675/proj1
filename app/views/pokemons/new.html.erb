@@ -1,0 +1,8 @@
+<h3>Create a Pokemon</h3>
+<% if @error != nil %>
+	<%= simple_format("<p>Error: #{@error}</p>") %>
+<% end %>
+<%= simple_form_for @pokemon do |f| %>
+  <%= f.input :name %>
+  <%= f.button :submit %>
+<% end %>
