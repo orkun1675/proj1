@@ -25,3 +25,6 @@ After the header but before the body of the page the "application.html.erb" tell
 # Give us feedback on the project and decal below!
 
 # Extra credit: Link your Heroku deployed app
+
+Finished all extra credit. Website deployed at:
+https://protected-beach-76564.herokuapp.com/
