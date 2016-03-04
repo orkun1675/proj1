@@ -8,7 +8,7 @@ class TrainersController < ApplicationController
   def show
     @trainer = Trainer.find(params[:id])
     @pokemons = Pokemon.where(trainer_id: @trainer.id)
-    @logged_in = @trainer.id == current_trainer.id
+    @my_page = @trainer.id == current_trainer.id
   end
 
 end

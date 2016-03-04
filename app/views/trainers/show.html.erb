@@ -1,7 +1,7 @@
 <h3>Trainer</h3>
 <p>Name: <%= @trainer.name if @trainer.name %></p>
 <p>Email: <%= @trainer.email if @trainer.email %></p>
-<% if @logged_in %>
+<% if @my_page %>
 	<%= button_to "Create Pokemon", new_pokemon_path, :class => "button medium", :method => :get %>
 <% end %>
 
@@ -9,8 +9,16 @@
 <% if @pokemons.any? %>
 <% @pokemons.each do |p| %>
 <p>
-	<i>Name:</i> <%= p.name %>, <i>Level:</i> <%= p.level %>, <i>Health:</i> <%= p.health %>
-	<%= button_to "Damage!", damage_path(id: p), :class => "button small", :method => :patch %>
+	<% if @my_page %>
+		<i>Name:</i> <%= p.name %>, <i>Level:</i> <%= p.level %>, <i>Health:</i> <%= p.health %>
+		<%= button_to "Heal", heal_path(id: p), :class => "button small", :method => :patch %>
+
+		<%= button_to "Damage!", attack_path(id: p), :class => "button small", :method => :patch %>
+
+	<% elsif p.health > 0 %>
+		<i>Name:</i> <%= p.name %>, <i>Level:</i> <%= p.level %>, <i>Health:</i> <%= p.health %>
+		<%= button_to "Damage!", attack_path(id: p), :class => "button small", :method => :patch %>
+	<% end %>
 </p>
 <% end %>
 <% else %>

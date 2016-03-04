@@ -8,13 +8,12 @@ class PokemonsController < ApplicationController
 	end
 
 	def damage
-		damaged_pokemon = Pokemon.where(id: params[:id]).first
+		damaged_pokemon = Pokemon.where(id: params[:target]).first
 		damaged_pokemon.health -= 10
-		if damaged_pokemon.health <= 0
-			damaged_pokemon.destroy
-		else
-			damaged_pokemon.save
-		end
+		damaged_pokemon.save
+		attacker_pokemon = Pokemon.where(id: params[:attacker][:pokemon_id]).first
+		attacker_pokemon.level += 1
+		attacker_pokemon.save
 		redirect_to trainer_path(current_trainer)
 	end
 
@@ -42,6 +41,24 @@ class PokemonsController < ApplicationController
 
 	def user_params
     	params.require(:pokemon).permit(:name)
+  	end
+
+  	def heal
+  		heal_pokemon = Pokemon.where(id: params[:id]).first
+  		if heal_pokemon.health < 100
+			heal_pokemon.health += 10
+			heal_pokemon.save
+		else
+			flash[:error] = "The pokemon #{heal_pokemon.name} is already at full health!"
+		end
+		redirect_to trainer_path(current_trainer)
+  	end
+
+  	def attack
+  		@target_pokemon = Pokemon.where(id: params[:id]).first
+  		@target_trainer = Trainer.where(id: @target_pokemon.trainer_id).first
+  		@pokemons = Pokemon.where(trainer_id: current_trainer.id)
+  		puts @pokemons
   	end
 
 end

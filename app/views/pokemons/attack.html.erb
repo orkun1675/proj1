@@ -1,0 +1,17 @@
+<h3>Attack Pokemon</h3>
+
+<h4> Target </h4>
+<p> Trainer: <%= @target_trainer.name %> </p>
+<p> Pokemon: <%= @target_pokemon.name %> </p>
+
+<h4> Choose Pokemon </h4>
+
+<%= form_tag damage_path(target: @target_pokemon) do %>
+	<%= collection_select(:attacker, :pokemon_id, @pokemons, :id, :name) %>
+  	<%= submit_tag "Attack!", :class => "button medium" %>
+<% end %>
+
+<!--
+<p> Attack with: <%= collection_select(:attacker, :pokemon_id, @pokemons, :id, :name) %> <p>
+<%= button_to "Damage!", damage_path(target: @target_pokemon, attacker: :attacker), :class => "button medium", :method => :patch %>
+-->
