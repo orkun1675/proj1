@@ -57,8 +57,7 @@ class PokemonsController < ApplicationController
   	def attack
   		@target_pokemon = Pokemon.where(id: params[:id]).first
   		@target_trainer = Trainer.where(id: @target_pokemon.trainer_id).first
-  		@pokemons = Pokemon.where(trainer_id: current_trainer.id)
-  		puts @pokemons
+  		@pokemons = Pokemon.where(trainer_id: current_trainer.id).select{|p| p.health > 0}
   	end
 
 end

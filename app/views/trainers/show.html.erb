@@ -12,9 +12,6 @@
 	<% if @my_page %>
 		<i>Name:</i> <%= p.name %>, <i>Level:</i> <%= p.level %>, <i>Health:</i> <%= p.health %>
 		<%= button_to "Heal", heal_path(id: p), :class => "button small", :method => :patch %>
-
-		<%= button_to "Damage!", attack_path(id: p), :class => "button small", :method => :patch %>
-
 	<% elsif p.health > 0 %>
 		<i>Name:</i> <%= p.name %>, <i>Level:</i> <%= p.level %>, <i>Health:</i> <%= p.health %>
 		<%= button_to "Damage!", attack_path(id: p), :class => "button small", :method => :patch %>
